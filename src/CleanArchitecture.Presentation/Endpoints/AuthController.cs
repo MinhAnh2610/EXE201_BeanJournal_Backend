@@ -139,54 +139,54 @@ public class AuthController : ICarterModule
     .RequireAuthorization();
     #endregion
 
-    #region External Login API
-    group.MapGet("/external-login", ([FromQuery] string provider) =>
-    {
-      var redirectUrl = "https://localhost:5051/api/auth";
-      switch (provider)
-      {
-        case "Google":
-          redirectUrl += Providers.Google;
-          break;
-        default:
-          break;
-      }
-      var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
-      return Results.Challenge(properties, new[] { provider });
-    })
-    .WithName("ExternalLogin")
-    .Produces<ApiResponse<string>>(StatusCodes.Status200OK)
-    .ProducesProblem(StatusCodes.Status400BadRequest)
-    .ProducesProblem(StatusCodes.Status500InternalServerError)
-    .WithSummary("ExternalLogin")
-    .WithDescription("Enter Your Provider For External Authentication");
+    //#region External Login API
+    //group.MapGet("/external-login", ([FromQuery] string provider) =>
+    //{
+    //  var redirectUrl = "https://localhost:5051/api/auth";
+    //  switch (provider)
+    //  {
+    //    case "Google":
+    //      redirectUrl += Providers.Google;
+    //      break;
+    //    default:
+    //      break;
+    //  }
+    //  var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+    //  return Results.Challenge(properties, new[] { provider });
+    //})
+    //.WithName("ExternalLogin")
+    //.Produces<ApiResponse<string>>(StatusCodes.Status200OK)
+    //.ProducesProblem(StatusCodes.Status400BadRequest)
+    //.ProducesProblem(StatusCodes.Status500InternalServerError)
+    //.WithSummary("ExternalLogin")
+    //.WithDescription("Enter Your Provider For External Authentication");
 
-    group.MapGet("/signin-google", async (UserManager<User> userManager, HttpContext httpContext) =>
-    {
-      var result = await httpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
-      if (!result.Succeeded)
-        return Results.BadRequest("Google authentication failed.");
+    //group.MapGet("/signin-google", async (UserManager<User> userManager, HttpContext httpContext) =>
+    //{
+    //  var result = await httpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+    //  if (!result.Succeeded)
+    //    return Results.BadRequest("Google authentication failed.");
 
-      var claims = result.Principal?.Identities?.FirstOrDefault()?.Claims.ToList();
+    //  var claims = result.Principal?.Identities?.FirstOrDefault()?.Claims.ToList();
 
-      var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-      var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+    //  var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+    //  var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
 
-      if (email == null)
-        return Results.BadRequest("Email not found in Google response.");
+    //  if (email == null)
+    //    return Results.BadRequest("Email not found in Google response.");
 
-      // TODO: Check if the user exists in your database and create an account if necessary.
-      var user = await userManager.FindByEmailAsync(email);
-      if (user == null)
-        return Results.BadRequest("User hasn't signup yet.");
+    //  // TODO: Check if the user exists in your database and create an account if necessary.
+    //  var user = await userManager.FindByEmailAsync(email);
+    //  if (user == null)
+    //    return Results.BadRequest("User hasn't signup yet.");
 
-      var identity = new ClaimsIdentity(claims, IdentityServerConstants.ExternalCookieAuthenticationScheme);
-      var principal = new ClaimsPrincipal(identity);
+    //  var identity = new ClaimsIdentity(claims, IdentityServerConstants.ExternalCookieAuthenticationScheme);
+    //  var principal = new ClaimsPrincipal(identity);
 
-      await httpContext.SignInAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme, principal);
+    //  await httpContext.SignInAsync(IdentityServerConstants.ExternalCookieAuthenticationScheme, principal);
 
-      return Results.Ok("Hey");
-    });
-    #endregion
+    //  return Results.Ok("Hey");
+    //});
+    //#endregion
   }
 }

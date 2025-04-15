@@ -26,7 +26,7 @@ public static class DependencyInjection
     services.AddSingleton(configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>()!);
 
     // Add identity server 4 validator for owner password
-    services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
+    //services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
 
     // Add services
     services.AddScoped<IAuthService, AuthService>();
@@ -34,6 +34,8 @@ public static class DependencyInjection
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IRoleService, RoleService>();
     services.AddScoped<ITimeZoneService, TimeZoneService>();
+
+    services.AddHttpClient();
 
     return services;
   }

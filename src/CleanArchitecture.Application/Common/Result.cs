@@ -39,7 +39,7 @@ public class Result<T>
   /// <param name="data">Data of the result.</param>
   /// <param name="status">Status code of the Result.</param>
   /// <returns></returns>
-  public static Result<T> Success(T data, int status) => new Result<T>(true, new List<Error>(), data, status);
+  public static Result<T> Success(T data, int status) => new(true, [], data, status);
 
 
   /// <summary>
@@ -48,7 +48,7 @@ public class Result<T>
   /// <param name="errors">The list of data with error type.</param>
   /// <param name="status">Status code of the Result.</param>
   /// <returns></returns>
-  public static Result<T> Failure(List<Error> errors, int status) => new Result<T>(false, errors, default, status);
+  public static Result<T> Failure(List<Error> errors, int status) => new(false, errors, default, status);
 
   /// <summary>
   /// This function returns the Results of the API according to the success of the Result, the status code of the Result, and its errors
@@ -59,7 +59,7 @@ public class Result<T>
   {
     if (Errors.Count > 0)
     {
-      StringBuilder stringBuilder = new StringBuilder();
+      StringBuilder stringBuilder = new();
       foreach (var error in Errors)
       {
         stringBuilder.AppendLine(error.Description);

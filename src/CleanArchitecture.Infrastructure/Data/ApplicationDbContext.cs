@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
 namespace CleanArchitecture.Infrastructure.Data;
@@ -8,15 +8,21 @@ public interface IApplicationDbContext
   Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options), IApplicationDbContext
 {
-  public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+  public static string GetConnectionString(string connectionStringName)
   {
+    var config = new ConfigurationBuilder()
+        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        .AddJsonFile("appsettings.json")
+        .Build();
+
+    string connectionString = config.GetConnectionString(connectionStringName)!;
+    return connectionString;
   }
 
-  public ApplicationDbContext()
-  {
-  }
+  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+      => optionsBuilder.UseSqlServer(GetConnectionString("SQLServerDatabase")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
   public DbSet<User> Users { get; set; } = null!;
   public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; } = null!;

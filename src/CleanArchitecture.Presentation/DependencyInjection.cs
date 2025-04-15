@@ -87,16 +87,16 @@ public static class DependencyInjection
           ValidateAudience = false,
         };
       });
-      //.AddGoogle(options =>
-      //{
-      //  options.ClientId = config["Authentication:Google:ClientId"]!;
-      //  options.ClientSecret = config["Authentication:Google:ClientSecret"]!;
-      //  options.CallbackPath = "/signin-google";
-      //});
+    //.AddGoogle(options =>
+    //{
+    //  options.ClientId = config["Authentication:Google:ClientId"]!;
+    //  options.ClientSecret = config["Authentication:Google:ClientSecret"]!;
+    //  options.CallbackPath = "/signin-google";
+    //});
 
     services.AddAuthorization(options =>
     {
-      options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "client"));
+      //options.AddPolicy("ClientIdPolicy", policy => policy.RequireClaim("client_id", "client"));
     });
 
     services.AddCarter();
@@ -115,7 +115,7 @@ public static class DependencyInjection
 
     app.UseRouting();
 
-    app.UseIdentityServer();
+    //app.UseIdentityServer();
     app.UseCors("AllowAll"); // ✅ Apply CORS globally
     app.UseAuthentication();
     app.UseAuthorization();
