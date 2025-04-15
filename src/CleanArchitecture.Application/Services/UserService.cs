@@ -41,11 +41,11 @@ public class UserService : IUserService
     var user = await _userManager.FindByNameAsync(request.UserName);
     if (user == null)
       return Result<string>.Failure([AuthErrors.UserNotFound], StatusCodes.Status404NotFound);
-    user.RefreshToken = null;
-    user.RefreshTokenExpiration = null;
+    //user.RefreshToken = null;
+    //user.RefreshTokenExpiration = null;
 
-    user.LockoutEnabled = true;
-    user.LockoutEnd = DateTime.UtcNow.AddYears(100);
+    //user.LockoutEnabled = true;
+    //user.LockoutEnd = DateTime.UtcNow.AddYears(100);
     var result = await _userManager.UpdateAsync(user);
     var resultErrors = result.Errors.Select(e => new Error(e.Code, e.Description)).ToList();
     return result.Succeeded
@@ -69,7 +69,7 @@ public class UserService : IUserService
     if (user == null)
       return Result<string>.Failure([AuthErrors.UserNotFound], StatusCodes.Status404NotFound);
 
-    user.LockoutEnabled = false;
+    //user.LockoutEnabled = false;
     var result = await _userManager.UpdateAsync(user);
     var resultErrors = result.Errors.Select(e => new Error(e.Code, e.Description)).ToList();
     return result.Succeeded
@@ -133,16 +133,16 @@ public class UserService : IUserService
     if (user == null)
       return Result<UserProfileResponse>.Failure([AuthErrors.UserNotFound], StatusCodes.Status404NotFound);
 
-    user.UserName = request.UserName ?? user.UserName;
-    var duplicateUser = await _userManager.FindByNameAsync(user.UserName!);
-    if (duplicateUser != null && duplicateUser.Id != user.Id)
-      return Result<UserProfileResponse>.Failure([AuthErrors.DuplicateUserName], StatusCodes.Status409Conflict);
+    //user.UserName = request.UserName ?? user.UserName;
+    //var duplicateUser = await _userManager.FindByNameAsync(user.UserName!);
+    //if (duplicateUser != null && duplicateUser.Id != user.Id)
+    //  return Result<UserProfileResponse>.Failure([AuthErrors.DuplicateUserName], StatusCodes.Status409Conflict);
 
-    user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
-    user.BirthDate = request.BirthDate ?? user.BirthDate;
-    user.FirstName = request.FirstName ?? user.FirstName;
-    user.LastName = request.LastName ?? user.LastName;
-    user.Gender = request.Gender ?? user.Gender;
+    //user.PhoneNumber = request.PhoneNumber ?? user.PhoneNumber;
+    //user.BirthDate = request.BirthDate ?? user.BirthDate;
+    //user.FirstName = request.FirstName ?? user.FirstName;
+    //user.LastName = request.LastName ?? user.LastName;
+    //user.Gender = request.Gender ?? user.Gender;
 
     var result = await _userManager.UpdateAsync(user);
     if (!result.Succeeded)
@@ -154,13 +154,13 @@ public class UserService : IUserService
     return Result<UserProfileResponse>.Success(new UserProfileResponse
     {
       Id = id,
-      UserName = user.UserName!,
-      Email = user.Email!,
-      PhoneNumber = user.PhoneNumber,
-      BirthDate = user.BirthDate,
-      FirstName = user.FirstName,
-      LastName = user.LastName,
-      Gender = user.Gender,
+      //UserName = user.UserName!,
+      //Email = user.Email!,
+      //PhoneNumber = user.PhoneNumber,
+      //BirthDate = user.BirthDate,
+      //FirstName = user.FirstName,
+      //LastName = user.LastName,
+      //Gender = user.Gender,
       Roles = roles
     }, StatusCodes.Status200OK);
   }

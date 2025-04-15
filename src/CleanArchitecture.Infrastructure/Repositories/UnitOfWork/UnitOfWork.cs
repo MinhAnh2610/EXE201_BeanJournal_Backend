@@ -15,9 +15,7 @@ public class UnitOfWork : IUnitOfWork
   private readonly ITimeZoneService _timeZoneService;
 
   #region Repositories
-
-
-
+  public IUserRepository Users => new UserRepository(_context);
   #endregion
 
   public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger, ITimeZoneService timeZoneService)

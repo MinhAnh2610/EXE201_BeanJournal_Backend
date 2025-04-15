@@ -54,14 +54,14 @@ public class RoleService : IRoleService
     var resultErrors = result.Errors.Select(e => new Error(e.Code, e.Description)).ToList();
     var userProfile = new UserProfileResponse
     {
-      Id = user.Id,
-      UserName = user.UserName!,
-      Email = user.Email!,
-      BirthDate = user.BirthDate,
-      FirstName = user.FirstName,
-      LastName = user.LastName,
-      Gender = user.Gender,
-      PhoneNumber = user.PhoneNumber,
+      //Id = user.Id,
+      //UserName = user.UserName!,
+      //Email = user.Email!,
+      //BirthDate = user.BirthDate,
+      //FirstName = user.FirstName,
+      //LastName = user.LastName,
+      //Gender = user.Gender,
+      //PhoneNumber = user.PhoneNumber,
       Roles = request.Roles,
     };
     return result.Succeeded

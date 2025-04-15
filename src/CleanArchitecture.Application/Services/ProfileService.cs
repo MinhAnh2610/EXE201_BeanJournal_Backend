@@ -26,16 +26,16 @@ public class ProfileService : IProfileService
       var claims = new List<Claim>
       {
         // Add standard claims
-        new Claim(JwtClaimTypes.Subject, user.Id),
-        new Claim(JwtClaimTypes.Name, user.UserName!),
-        new Claim(JwtClaimTypes.Email, user.Email!),
+        //new Claim(JwtClaimTypes.Subject, user.Id),
+        //new Claim(JwtClaimTypes.Name, user.UserName!),
+        //new Claim(JwtClaimTypes.Email, user.Email!),
           
         // Add custom claims with user profile data
-        new Claim(JwtClaimTypes.PhoneNumber, user.PhoneNumber!),
-        new Claim(JwtClaimTypes.BirthDate, user.BirthDate.ToString()!),
-        new Claim(JwtClaimTypes.FamilyName, user.FirstName!),
-        new Claim(JwtClaimTypes.GivenName, user.LastName!),
-        new Claim(JwtClaimTypes.Gender, user.Gender.ToString())
+        //new Claim(JwtClaimTypes.PhoneNumber, user.PhoneNumber!),
+        //new Claim(JwtClaimTypes.BirthDate, user.BirthDate.ToString()!),
+        //new Claim(JwtClaimTypes.FamilyName, user.FirstName!),
+        //new Claim(JwtClaimTypes.GivenName, user.LastName!),
+        //new Claim(JwtClaimTypes.Gender, user.Gender.ToString())
         //new Claim("UserProfile", $"{user.FirstName} {user.LastName}"),        
         //new Claim("ProfilePicture", user.ProfilePictureUrl ?? string.Empty)
       };

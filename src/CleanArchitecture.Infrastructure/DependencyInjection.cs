@@ -4,6 +4,7 @@ using CleanArchitecture.Domain.RepositoryContracts.UnitOfWork;
 using CleanArchitecture.Infrastructure.Auth;
 using CleanArchitecture.Infrastructure.Data.Interceptors;
 using CleanArchitecture.Infrastructure.Redis;
+using CleanArchitecture.Infrastructure.Repositories;
 using CleanArchitecture.Infrastructure.Repositories.Base;
 using CleanArchitecture.Infrastructure.Repositories.UnitOfWork;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -34,7 +35,7 @@ public static class DependencyInjection
       options.EnableSensitiveDataLogging();
 
       //options.UseNpgsql(configuration.GetConnectionString("Database"));
-      options.UseInMemoryDatabase("Database");
+      //options.UseInMemoryDatabase("Database");
     });
 
     services.AddStackExchangeRedisCache(options =>
@@ -49,6 +50,10 @@ public static class DependencyInjection
 
     // Register Generic Repository
     services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+    #region Register Repositories
+    services.AddScoped<IUserRepository, UserRepository>();
+    #endregion
 
     // Register Redis Caching
     services.AddScoped<IRedisCacheRepository, RedisCacheRepository>();

@@ -22,7 +22,7 @@ public class User : Entity<long>
   public virtual ICollection<HabitLog> HabitLogs { get; set; } = new List<HabitLog>();
   public virtual ICollection<Goal> Goals { get; set; } = new List<Goal>();
   public virtual ICollection<GoalUpdate> GoalUpdates { get; set; } = new List<GoalUpdate>();
-  public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+  public virtual ICollection<Todo> Todos { get; set; } = new List<Todo>();
   public virtual UserSettings? UserSettings { get; set; }
   public virtual ICollection<Streak> Streaks { get; set; } = new List<Streak>();
   public virtual ICollection<UserAchievement> UserAchievements { get; set; } = new List<UserAchievement>();

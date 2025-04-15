@@ -99,7 +99,7 @@ public class AuthService : IAuthService
       ClientId = "api_client",
       ClientSecret = "secret",
 
-      UserName = user.UserName!,
+      //UserName = user.UserName!,
       Password = request.Password,
 
       Scope = "openid profile email roles API offline_access"
@@ -110,8 +110,8 @@ public class AuthService : IAuthService
       return Result<AuthResponse>.Failure([AuthErrors.TokenResponseError(tokenResponse.ErrorDescription!)], StatusCodes.Status400BadRequest);
     }
 
-    user.RefreshToken = tokenResponse.RefreshToken;
-    user.RefreshTokenExpiration = DateTime.UtcNow + TimeSpan.FromDays(30);
+    //user.RefreshToken = tokenResponse.RefreshToken;
+    //user.RefreshTokenExpiration = DateTime.UtcNow + TimeSpan.FromDays(30);
 
     return Result<AuthResponse>.Success(new AuthResponse
     {
@@ -120,7 +120,7 @@ public class AuthService : IAuthService
       RefreshToken = tokenResponse.RefreshToken!,
       RefreshTokenExpiration = 2592000,
       Email = user.Email!,
-      UserName = user.UserName!,
+      //UserName = user.UserName!,
     }, StatusCodes.Status200OK);
   }
 
@@ -167,8 +167,8 @@ public class AuthService : IAuthService
     if (tokenResponse.IsError)
       return Result<AuthResponse>.Failure([AuthErrors.TokenResponseError(tokenResponse.ErrorDescription!)], StatusCodes.Status400BadRequest);
 
-    user!.RefreshToken = tokenResponse.RefreshToken;
-    user.RefreshTokenExpiration = DateTime.UtcNow + TimeSpan.FromDays(30);
+    //user!.RefreshToken = tokenResponse.RefreshToken;
+    //user.RefreshTokenExpiration = DateTime.UtcNow + TimeSpan.FromDays(30);
 
     return Result<AuthResponse>.Success(new AuthResponse
     {
@@ -177,7 +177,7 @@ public class AuthService : IAuthService
       RefreshToken = tokenResponse.RefreshToken!,
       RefreshTokenExpiration = 2592000,
       Email = user.Email!,
-      UserName = user.UserName!,
+      //UserName = user.UserName!,
     }, StatusCodes.Status200OK);
   }
 
@@ -203,12 +203,12 @@ public class AuthService : IAuthService
 
     var user = new User 
     { 
-      UserName = request.UserName, 
-      Email = request.Email,
-      Gender = request.Gender,
-      FirstName = request.FirstName,
-      LastName = request.LastName,
-      PhoneNumber = request.PhoneNumber
+      //UserName = request.UserName, 
+      //Email = request.Email,
+      //Gender = request.Gender,
+      //FirstName = request.FirstName,
+      //LastName = request.LastName,
+      //PhoneNumber = request.PhoneNumber
     };
 
     var result = await _userManager.CreateAsync(user, request.Password);

@@ -8,7 +8,7 @@ public interface IApplicationDbContext
   Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
 
-public class ApplicationDbContext : IdentityDbContext<User, Role, string>, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
   {
@@ -30,7 +30,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, string>, IAppl
   public DbSet<HabitLog> HabitLogs { get; set; } = null!;
   public DbSet<Goal> Goals { get; set; } = null!;
   public DbSet<GoalUpdate> GoalUpdates { get; set; } = null!;
-  public DbSet<Domain.Entities.Task> Tasks { get; set; } = null!;
+  public DbSet<Todo> Todos { get; set; } = null!;
   public DbSet<Theme> Themes { get; set; } = null!;
   public DbSet<UserSettings> UserSettings { get; set; } = null!;
   public DbSet<Streak> Streaks { get; set; } = null!;

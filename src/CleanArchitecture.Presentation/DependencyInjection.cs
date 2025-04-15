@@ -44,23 +44,23 @@ public static class DependencyInjection
     });
 
     // Add identity
-    services.AddIdentity<User, Role>(options =>
-    {
-      options.Password.RequiredLength = 5;
-      options.Password.RequireNonAlphanumeric = false;
-      options.Password.RequireUppercase = false;
-      options.Password.RequireLowercase = false;
-      options.Password.RequireDigit = false;
-      options.Password.RequiredUniqueChars = 0;
+    //services.AddIdentity<User, Role>(options =>
+    //{
+    //  options.Password.RequiredLength = 5;
+    //  options.Password.RequireNonAlphanumeric = false;
+    //  options.Password.RequireUppercase = false;
+    //  options.Password.RequireLowercase = false;
+    //  options.Password.RequireDigit = false;
+    //  options.Password.RequiredUniqueChars = 0;
 
-      options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
-      options.Lockout.MaxFailedAccessAttempts = 5;
-      options.Lockout.AllowedForNewUsers = true;
-    })
-      .AddEntityFrameworkStores<ApplicationDbContext>()
-      .AddDefaultTokenProviders()
-      .AddUserStore<UserStore<User, Role, ApplicationDbContext>>()
-      .AddRoleStore<RoleStore<Role, ApplicationDbContext>>();
+    //  options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(30);
+    //  options.Lockout.MaxFailedAccessAttempts = 5;
+    //  options.Lockout.AllowedForNewUsers = true;
+    //})
+    //  .AddEntityFrameworkStores<ApplicationDbContext>()
+    //  .AddDefaultTokenProviders()
+    //  .AddUserStore<UserStore<User, Role, ApplicationDbContext>>()
+    //  .AddRoleStore<RoleStore<Role, ApplicationDbContext>>();
 
     services.AddCors(options =>
     {
