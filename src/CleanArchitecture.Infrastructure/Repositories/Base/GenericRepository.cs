@@ -60,6 +60,28 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
     return entity;
   }
 
+  public virtual T? GetById(long id)
+  {
+    var entity = _context.Set<T>().Find(id);
+    if (entity != null)
+    {
+      _context.Entry(entity).State = EntityState.Detached;
+    }
+
+    return entity;
+  }
+
+  public async Task<T?> GetByIdAsync(long id)
+  {
+    var entity = await _context.Set<T>().FindAsync(id);
+    if (entity != null)
+    {
+      _context.Entry(entity).State = EntityState.Detached;
+    }
+
+    return entity;
+  }
+
   public virtual T? GetById(string code)
   {
     var entity = _context.Set<T>().Find(code);

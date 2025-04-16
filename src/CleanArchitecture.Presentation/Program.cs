@@ -1,6 +1,5 @@
 using CleanArchitecture.Application;
 using CleanArchitecture.Infrastructure;
-using CleanArchitecture.Infrastructure.Data.Extensions;
 using CleanArchitecture.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);

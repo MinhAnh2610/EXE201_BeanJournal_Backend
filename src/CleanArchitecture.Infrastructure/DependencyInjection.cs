@@ -1,7 +1,5 @@
-﻿using CleanArchitecture.Application.Services;
-using CleanArchitecture.Domain.RepositoryContracts.Base;
+﻿using CleanArchitecture.Domain.RepositoryContracts.Base;
 using CleanArchitecture.Domain.RepositoryContracts.UnitOfWork;
-using CleanArchitecture.Infrastructure.Auth;
 using CleanArchitecture.Infrastructure.Data.Interceptors;
 using CleanArchitecture.Infrastructure.Redis;
 using CleanArchitecture.Infrastructure.Repositories;

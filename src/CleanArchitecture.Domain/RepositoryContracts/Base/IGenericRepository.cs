@@ -8,9 +8,11 @@
     Task<List<T>> GetAllAsync();
     T? GetById(Guid code);
     T? GetById(int id);
+    T? GetById(long id);
     T? GetById(string code);
     Task<T?> GetByIdAsync(Guid code);
     Task<T?> GetByIdAsync(int id);
+    Task<T?> GetByIdAsync(long id);
     Task<T?> GetByIdAsync(string code);
     void Remove(T entity);
     void Update(T entity);
