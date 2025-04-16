@@ -13,7 +13,7 @@ public class UserSettingsConfiguration : IEntityTypeConfiguration<UserSettings>
     builder.Property(us => us.LayoutPreference).HasMaxLength(50);
     builder.Property(us => us.ReminderEnabled).HasDefaultValue(false);
 
-    builder.Property(us => us.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("GETUTCDATE()");
+    builder.Property(us => us.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasDefaultValueSql("NOW()");
 
     // Relationship: UserSettings -> User (1:1)
     builder.HasOne(us => us.User)

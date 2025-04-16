@@ -10,20 +10,6 @@ public interface IApplicationDbContext
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options), IApplicationDbContext
 {
-  public static string GetConnectionString(string connectionStringName)
-  {
-    var config = new ConfigurationBuilder()
-        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        .AddJsonFile("appsettings.json")
-        .Build();
-
-    string connectionString = config.GetConnectionString(connectionStringName)!;
-    return connectionString;
-  }
-
-  protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-      => optionsBuilder.UseSqlServer(GetConnectionString("SQLServerDatabase")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
   public DbSet<User> Users { get; set; } = null!;
   public DbSet<SubscriptionPlan> SubscriptionPlans { get; set; } = null!;
   public DbSet<UserSubscription> UserSubscriptions { get; set; } = null!;

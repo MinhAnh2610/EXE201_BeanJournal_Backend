@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace CleanArchitecture.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class intial_create : Migration
+    public partial class initial_create : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,17 +16,17 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Achievements",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CriteriaKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    BadgeIconUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    CriteriaKey = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    BadgeIconUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,20 +37,20 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "SubscriptionPlans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PlanCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PriceMonthly = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
-                    PriceYearly = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
-                    BillingCycle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    FeatureFlags = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PlanCode = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    PriceMonthly = table.Column<decimal>(type: "numeric(10,2)", nullable: true),
+                    PriceYearly = table.Column<decimal>(type: "numeric(10,2)", nullable: true),
+                    BillingCycle = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    FeatureFlags = table.Column<string>(type: "text", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,18 +61,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Themes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StylePropertiesJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsPremium = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    IsPredefined = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    StylePropertiesJson = table.Column<string>(type: "text", nullable: false),
+                    IsPremium = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    IsPredefined = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,19 +84,19 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClerkUserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EncryptionMasterKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ClerkUserId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Username = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    ProfileImageUrl = table.Column<string>(type: "text", nullable: true),
+                    EncryptionMasterKey = table.Column<byte[]>(type: "bytea", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,20 +108,20 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Content = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsPasswordProtected = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    EntryPasswordHash = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    SentimentScore = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
-                    DominantMoodLabel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    Content = table.Column<byte[]>(type: "bytea", nullable: false),
+                    EntryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsPasswordProtected = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    EntryPasswordHash = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    SentimentScore = table.Column<decimal>(type: "numeric(3,2)", nullable: true),
+                    DominantMoodLabel = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,17 +139,17 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     TargetDate = table.Column<DateTime>(type: "date", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,18 +167,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Frequency = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ColorCode = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: true),
-                    Icon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
+                    Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Frequency = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    ColorCode = table.Column<string>(type: "character varying(7)", maxLength: 7, nullable: true),
+                    Icon = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -195,19 +196,19 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    ServiceName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    AccessTokenEncrypted = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    RefreshTokenEncrypted = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    ExternalUserId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Scopes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    ServiceName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    AccessTokenEncrypted = table.Column<byte[]>(type: "bytea", nullable: false),
+                    RefreshTokenEncrypted = table.Column<byte[]>(type: "bytea", nullable: true),
+                    ExternalUserId = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    Scopes = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,14 +226,14 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,16 +251,16 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsPredefined = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Name = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    Content = table.Column<string>(type: "text", nullable: false),
+                    IsPredefined = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -277,8 +278,8 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    AchievementId = table.Column<int>(type: "int", nullable: false),
-                    EarnedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                    AchievementId = table.Column<int>(type: "integer", nullable: false),
+                    EarnedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -302,13 +303,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    ThemeId = table.Column<int>(type: "int", nullable: true),
-                    FontPreference = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    LayoutPreference = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ReminderEnabled = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    ReminderTime = table.Column<TimeSpan>(type: "time", nullable: true),
-                    OtherSettingsJson = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                    ThemeId = table.Column<int>(type: "integer", nullable: true),
+                    FontPreference = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    LayoutPreference = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    ReminderEnabled = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
+                    ReminderTime = table.Column<TimeSpan>(type: "interval", nullable: true),
+                    OtherSettingsJson = table.Column<string>(type: "text", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -332,18 +333,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    PlanId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PaymentGatewayRef = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    PlanId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    PaymentGatewayRef = table.Column<string>(type: "text", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -367,8 +368,8 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     EntryId = table.Column<long>(type: "bigint", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ResultJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    ResultJson = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -394,10 +395,10 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 {
                     EntryId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Label = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Score = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
-                    Source = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Label = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Score = table.Column<decimal>(type: "numeric(3,2)", nullable: true),
+                    Source = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Notes = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -421,19 +422,19 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EntryId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    StorageUrl = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    FileType = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MimeType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    StorageUrl = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false),
+                    FileType = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    MimeType = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    FileName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     SizeBytes = table.Column<long>(type: "bigint", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -457,18 +458,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     EntryId = table.Column<long>(type: "bigint", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsCompleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    IsCompleted = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     DueDate = table.Column<DateTime>(type: "date", nullable: true),
-                    CompletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    CompletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -492,17 +493,17 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     GoalId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     EntryId = table.Column<long>(type: "bigint", nullable: true),
-                    UpdateText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgressMetric = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    UpdateText = table.Column<string>(type: "text", nullable: true),
+                    ProgressMetric = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -532,16 +533,16 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     HabitId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Notes = table.Column<string>(type: "text", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -565,17 +566,17 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     RelatedHabitId = table.Column<long>(type: "bigint", nullable: true),
-                    CurrentLength = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    LongestLength = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    CurrentLength = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
+                    LongestLength = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -600,7 +601,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 {
                     EntryId = table.Column<long>(type: "bigint", nullable: false),
                     TagId = table.Column<long>(type: "bigint", nullable: false),
-                    AssignedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                    AssignedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
@@ -709,8 +710,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "IX_Streaks_UserId_Type_RelatedHabitId",
                 table: "Streaks",
                 columns: new[] { "UserId", "Type", "RelatedHabitId" },
-                unique: true,
-                filter: "[RelatedHabitId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubscriptionPlans_PlanCode",

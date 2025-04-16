@@ -8,7 +8,7 @@ public class UserAchievementConfiguration : IEntityTypeConfiguration<UserAchieve
   {
     builder.HasKey(ua => new { ua.UserId, ua.AchievementId }); // Composite Key
 
-    builder.Property(ua => ua.EarnedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()");
+    builder.Property(ua => ua.EarnedAt).ValueGeneratedOnAdd().HasDefaultValueSql("NOW()");
 
     // Relationship: UserAchievement -> User (N:1)
     builder.HasOne(ua => ua.User)

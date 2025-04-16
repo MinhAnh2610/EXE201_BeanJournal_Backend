@@ -21,6 +21,6 @@ public class EntryTagConfiguration : IEntityTypeConfiguration<EntryTag>
            .HasForeignKey(et => et.TagId)
            .OnDelete(DeleteBehavior.Cascade); // If Tag deleted, remove tag association
 
-    builder.Property(et => et.AssignedAt).ValueGeneratedOnAdd().HasDefaultValueSql("GETUTCDATE()");
+    builder.Property(et => et.AssignedAt).ValueGeneratedOnAdd().HasDefaultValueSql("NOW()");
   }
 }

@@ -31,8 +31,8 @@ public static class DependencyInjection
       options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
       options.EnableSensitiveDataLogging();
 
-      //options.UseNpgsql(configuration.GetConnectionString("PostgreDatabase"));
-      options.UseSqlServer(configuration.GetConnectionString("SQLServerDatabase"));
+      options.UseNpgsql(configuration.GetConnectionString("PostgreDatabase"));
+      //options.UseSqlServer(configuration.GetConnectionString("SQLServerDatabase"));
       //options.UseInMemoryDatabase("Database");
     });
 
