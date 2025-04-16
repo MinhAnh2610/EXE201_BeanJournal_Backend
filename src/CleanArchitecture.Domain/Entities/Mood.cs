@@ -2,7 +2,7 @@
 
 namespace CleanArchitecture.Domain.Entities;
 
-public class Mood : Entity<long>
+public class Mood
 {
   public long EntryId { get; set; } // PK and FK
   public long UserId { get; set; }

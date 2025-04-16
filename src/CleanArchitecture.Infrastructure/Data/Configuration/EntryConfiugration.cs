@@ -6,7 +6,7 @@ public class EntryConfiugration : IEntityTypeConfiguration<Entry>
 {
   public void Configure(EntityTypeBuilder<Entry> builder)
   {
-    builder.HasKey(e => e.EntryId);
+    builder.HasKey(e => e.Id);
 
     builder.Property(e => e.Title).HasMaxLength(255);
     builder.Property(e => e.Content).IsRequired(); // Assuming BLOB or TEXT type handled by provider

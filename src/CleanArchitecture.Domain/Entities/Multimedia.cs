@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Multimedia : Entity<long>
 {
-  public long MediaId { get; set; }
   public long EntryId { get; set; }
   public long UserId { get; set; } // Owner
   public string StorageUrl { get; set; } = null!;

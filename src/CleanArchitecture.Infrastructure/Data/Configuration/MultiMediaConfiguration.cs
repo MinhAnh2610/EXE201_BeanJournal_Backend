@@ -6,7 +6,7 @@ public class MultiMediaConfiguration : IEntityTypeConfiguration<Multimedia>
 {
   public void Configure(EntityTypeBuilder<Multimedia> builder)
   {
-    builder.HasKey(m => m.MediaId);
+    builder.HasKey(m => m.Id);
 
     builder.Property(m => m.StorageUrl).IsRequired().HasMaxLength(512);
     builder.Property(m => m.FileType).IsRequired().HasMaxLength(20);

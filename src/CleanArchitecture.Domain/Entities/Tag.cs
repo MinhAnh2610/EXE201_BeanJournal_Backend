@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Tag : Entity<long>
 {
-  public long TagId { get; set; }
   public long UserId { get; set; }
   public string Name { get; set; } = null!;
 

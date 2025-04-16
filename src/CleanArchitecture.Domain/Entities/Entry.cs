@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Entry : Entity<long>
 {
-  public long EntryId { get; set; }
   public long UserId { get; set; }
   public string? Title { get; set; }
   public byte[] Content { get; set; } = null!; // Encrypted

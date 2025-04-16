@@ -4,13 +4,15 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class User : Entity<long>
 {
-  public string ClerkUserId { get; set; } = null!;
-  public long UserId { get; set; }
-  public string Email { get; set; } = null!;
-  public string? PasswordHash { get; set; }
-  public string? Username { get; set; }
-  public string? AuthProvider { get; set; }
-  public string? AuthProviderId { get; set; }
+  // Clerk-related fields
+  public string ClerkUserId { get; set; } = null!; // From Clerk: "id"
+  public string Email { get; set; } = null!;       // From Clerk: "email_addresses[0].email_address"
+  public string? Username { get; set; }            // From Clerk: "username"
+  public string? FirstName { get; set; }           // From Clerk: "first_name"
+  public string? LastName { get; set; }            // From Clerk: "last_name"
+  public string? ProfileImageUrl { get; set; }     // From Clerk: "profile_image_url"
+
+  // App-specific optional fields
   public byte[]? EncryptionMasterKey { get; set; }
 
   // Navigation Properties

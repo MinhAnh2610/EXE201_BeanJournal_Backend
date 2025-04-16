@@ -6,7 +6,7 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
 {
   public void Configure(EntityTypeBuilder<Template> builder)
   {
-    builder.HasKey(t => t.TemplateId);
+    builder.HasKey(t => t.Id);
 
     builder.Property(t => t.Name).IsRequired().HasMaxLength(150);
     builder.Property(t => t.Content).IsRequired();

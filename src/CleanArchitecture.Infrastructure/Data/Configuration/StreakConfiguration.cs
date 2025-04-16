@@ -6,7 +6,7 @@ public class StreakConfiguration : IEntityTypeConfiguration<Streak>
 {
   public void Configure(EntityTypeBuilder<Streak> builder)
   {
-    builder.HasKey(s => s.StreakId);
+    builder.HasKey(s => s.Id);
     builder.Property(s => s.Type).IsRequired().HasMaxLength(50);
     builder.Property(s => s.CurrentLength).HasDefaultValue(0);
     builder.Property(s => s.LongestLength).HasDefaultValue(0);

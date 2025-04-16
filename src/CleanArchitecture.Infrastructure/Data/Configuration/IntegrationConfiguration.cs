@@ -6,7 +6,7 @@ public class IntegrationConfiguration : IEntityTypeConfiguration<Integration>
 {
   public void Configure(EntityTypeBuilder<Integration> builder)
   {
-    builder.HasKey(i => i.IntegrationId);
+    builder.HasKey(i => i.Id);
 
     builder.Property(i => i.ServiceName).IsRequired().HasMaxLength(50);
     builder.Property(i => i.AccessTokenEncrypted).IsRequired(); // BLOB/byte[]

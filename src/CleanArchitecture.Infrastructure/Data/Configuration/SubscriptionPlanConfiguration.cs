@@ -6,7 +6,7 @@ public class SubscriptionPlanConfiguration : IEntityTypeConfiguration<Subscripti
 {
   public void Configure(EntityTypeBuilder<SubscriptionPlan> builder)
   {
-    builder.HasKey(sp => sp.SubscriptionPlanId);
+    builder.HasKey(sp => sp.Id);
 
     builder.Property(sp => sp.PlanCode)
         .IsRequired()

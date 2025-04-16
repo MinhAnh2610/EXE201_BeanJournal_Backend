@@ -6,7 +6,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
   public void Configure(EntityTypeBuilder<User> builder)
   {
-    builder.HasKey(u => u.UserId); // Keep internal PK
+    builder.HasKey(u => u.Id); // Keep internal PK
 
     // Configure the ClerkUserId
     builder.Property(u => u.ClerkUserId)

@@ -122,6 +122,8 @@ public static class DependencyInjection
     app.UseAuthentication();
     app.UseAuthorization();
 
+    app.MapControllers();
+
     app.MapCarter();
 
     //app.UseHealthChecks("health",

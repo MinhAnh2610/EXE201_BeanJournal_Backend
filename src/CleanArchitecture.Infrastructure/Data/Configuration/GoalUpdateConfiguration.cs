@@ -6,7 +6,7 @@ public class GoalUpdateConfiguration : IEntityTypeConfiguration<GoalUpdate>
 {
   public void Configure(EntityTypeBuilder<GoalUpdate> builder)
   {
-    builder.HasKey(gu => gu.GoalUpdateId);
+    builder.HasKey(gu => gu.Id);
 
     builder.Property(gu => gu.ProgressMetric).HasMaxLength(100);
 

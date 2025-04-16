@@ -6,7 +6,7 @@ public class TodoConfiguration : IEntityTypeConfiguration<Todo>
 {
   public void Configure(EntityTypeBuilder<Todo> builder)
   {
-    builder.HasKey(t => t.TodoId);
+    builder.HasKey(t => t.Id);
 
     builder.Property(t => t.Description).IsRequired();
     builder.Property(t => t.IsCompleted).HasDefaultValue(false);

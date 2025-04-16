@@ -26,14 +26,18 @@ public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> 
 
     string? email = GetPrimaryEmail(userData);
     string? username = userData.TryGetProperty("username", out var uElement) ? uElement.GetString() : null;
-    // Extract other fields as needed (first_name, last_name, etc.)
+    string? firstName = userData.TryGetProperty("first_name", out var fElement) ? fElement.GetString() : null;
+    string? lastName = userData.TryGetProperty("last_name", out var lElement) ? lElement.GetString() : null;
+    string? profileImageUrl = userData.TryGetProperty("profile_image_url", out var iElement) ? iElement.GetString() : null;
 
     var newUser = new User
     {
       ClerkUserId = clerkId,
       Email = email!,
       Username = username,
-      // Set other defaults if necessary
+      FirstName = firstName,
+      LastName = lastName,
+      ProfileImageUrl = profileImageUrl
     };
 
     try
@@ -41,7 +45,7 @@ public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> 
       await _unitOfWork.Users.CreateAsync(newUser);
       _logger.LogInformation("ClerkSyncService: Created local user for Clerk ID {ClerkId}", clerkId);
 
-      //await _unitOfWork.CompleteAsync();
+      await _unitOfWork.CompleteAsync();
     }
     catch (Exception ex)
     {
@@ -71,12 +75,16 @@ public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> 
     // Extract updated fields
     string? email = GetPrimaryEmail(userData);
     string? username = userData.TryGetProperty("username", out var uElement) ? uElement.GetString() : null;
-    // Extract other fields as needed
+    string? firstName = userData.TryGetProperty("first_name", out var fElement) ? fElement.GetString() : null;
+    string? lastName = userData.TryGetProperty("last_name", out var lElement) ? lElement.GetString() : null;
+    string? profileImageUrl = userData.TryGetProperty("profile_image_url", out var iElement) ? iElement.GetString() : null;
 
     bool needsUpdate = false;
     if (userToUpdate.Email != email) { userToUpdate.Email = email!; needsUpdate = true; }
     if (userToUpdate.Username != username) { userToUpdate.Username = username; needsUpdate = true; }
-    // ... check other synced fields ...
+    if (userToUpdate.FirstName != firstName) { userToUpdate.FirstName = firstName; needsUpdate = true; }
+    if (userToUpdate.LastName != lastName) { userToUpdate.LastName = lastName; needsUpdate = true; }
+    if (userToUpdate.ProfileImageUrl != profileImageUrl) { userToUpdate.ProfileImageUrl = profileImageUrl; needsUpdate = true; }
 
     if (needsUpdate)
     {
@@ -85,7 +93,7 @@ public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> 
         _unitOfWork.Users.Update(userToUpdate);
         _logger.LogInformation("ClerkSyncService: Updated local user for Clerk ID {ClerkId}", clerkId);
 
-        //await _unitOfWork.CompleteAsync();
+        await _unitOfWork.CompleteAsync();
       }
       catch (Exception ex)
       {
@@ -113,7 +121,7 @@ public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> 
       await _unitOfWork.Users.DeleteUserByClerkIdAsync(clerkId);
       _logger.LogInformation("ClerkSyncService: Attempted deletion for Clerk ID {ClerkId} (Check repository logs for details).", clerkId);
 
-      //await _unitOfWork.CompleteAsync();
+      await _unitOfWork.CompleteAsync();
     }
     catch (Exception ex)
     {

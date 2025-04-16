@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Theme : Entity<int>
 {
-  public int ThemeId { get; set; }
   public string Name { get; set; } = null!;
   public string? Description { get; set; }
   public string StylePropertiesJson { get; set; } = null!; // JSON stored as string

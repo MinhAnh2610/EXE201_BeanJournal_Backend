@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Todo : Entity<long>
 {
-  public long TodoId { get; set; }
   public long UserId { get; set; }
   public long? EntryId { get; set; } // Optional link
   public string Description { get; set; } = null!;

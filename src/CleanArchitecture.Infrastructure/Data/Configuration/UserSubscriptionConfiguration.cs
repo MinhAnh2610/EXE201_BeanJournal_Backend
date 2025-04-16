@@ -6,7 +6,7 @@ public class UserSubscriptionConfiguration : IEntityTypeConfiguration<UserSubscr
 {
   public void Configure(EntityTypeBuilder<UserSubscription> builder)
   {
-    builder.HasKey(us => us.UserSubscriptionId);
+    builder.HasKey(us => us.Id);
 
     builder.Property(us => us.Status).IsRequired().HasMaxLength(50);
 

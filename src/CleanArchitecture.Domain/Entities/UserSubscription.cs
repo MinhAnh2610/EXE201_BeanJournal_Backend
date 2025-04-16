@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class UserSubscription : Entity<long>
 {
-  public long UserSubscriptionId { get; set; }
   public long UserId { get; set; }
   public int PlanId { get; set; }
   public string Status { get; set; } = null!;

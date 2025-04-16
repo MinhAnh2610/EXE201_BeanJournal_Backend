@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Integration : Entity<long>
 {
-  public long IntegrationId { get; set; }
   public long UserId { get; set; }
   public string ServiceName { get; set; } = null!; // 'google_calendar', 'notion', etc.
   public byte[] AccessTokenEncrypted { get; set; } = null!; // Encrypted

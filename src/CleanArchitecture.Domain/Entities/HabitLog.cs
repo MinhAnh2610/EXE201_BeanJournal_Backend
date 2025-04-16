@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class HabitLog : Entity<long>
 {
-  public long HabitLogId { get; set; }
   public long HabitId { get; set; }
   public long UserId { get; set; }
   public string Status { get; set; } = null!; // 'completed', 'skipped'

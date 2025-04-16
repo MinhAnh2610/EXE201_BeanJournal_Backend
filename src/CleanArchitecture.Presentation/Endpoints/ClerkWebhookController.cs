@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Svix;
-using System.Text.Json;
+using System.Net;
 using System.Text;
+using System.Text.Json;
 
 namespace CleanArchitecture.Presentation.Endpoints;
 
@@ -17,7 +18,7 @@ public class ClerkWebhooksController(
   private readonly ILogger<ClerkWebhooksController> _logger = logger;
 
   [HttpPost]
-  public async Task<IActionResult> Post() 
+  public async Task<IActionResult> Post()
   {
     // --- 1. Verify Signature (Same as before) ---
     var secret = _configuration["Clerk:WebhookSecret"];
@@ -29,10 +30,21 @@ public class ClerkWebhooksController(
     var headers = Request.Headers;
     string body;
     using (var reader = new StreamReader(Request.Body, Encoding.UTF8)) { body = await reader.ReadToEndAsync(); }
+
+    var webHeaders = new WebHeaderCollection();
+    foreach (var header in Request.Headers)
+    {
+      // Svix headers are expected in lower case: svix-id, svix-signature, svix-timestamp
+      if (header.Key.StartsWith("svix-", StringComparison.OrdinalIgnoreCase))
+      {
+        webHeaders[header.Key] = header.Value;
+      }
+    }
+
     try
     {
-      var wh = new Webhook(secret);
-      wh.Verify(body, (System.Net.WebHeaderCollection)headers);
+      var wh = new Webhook(secret); 
+      wh.Verify(body, webHeaders);
       _logger.LogInformation("Clerk Webhook signature verified successfully.");
     }
     catch (Exception ex)

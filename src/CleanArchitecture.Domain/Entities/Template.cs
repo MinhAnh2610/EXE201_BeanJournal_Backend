@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Template : Entity<long>
 {
-  public long TemplateId { get; set; }
   public long? UserId { get; set; } // Null for predefined
   public string Name { get; set; } = null!;
   public string Content { get; set; } = null!;

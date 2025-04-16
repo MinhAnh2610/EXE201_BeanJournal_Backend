@@ -6,7 +6,7 @@ public class ThemeConfiguration : IEntityTypeConfiguration<Theme>
 {
   public void Configure(EntityTypeBuilder<Theme> builder)
   {
-    builder.HasKey(t => t.ThemeId);
+    builder.HasKey(t => t.Id);
 
     builder.Property(t => t.Name)
         .IsRequired()

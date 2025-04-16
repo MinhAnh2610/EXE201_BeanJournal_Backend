@@ -6,7 +6,7 @@ public class HabitConfiguration : IEntityTypeConfiguration<Habit>
 {
   public void Configure(EntityTypeBuilder<Habit> builder)
   {
-    builder.HasKey(h => h.HabitId);
+    builder.HasKey(h => h.Id);
     builder.Property(h => h.Name).IsRequired().HasMaxLength(150);
     builder.Property(h => h.Frequency).HasMaxLength(50);
     builder.Property(h => h.ColorCode).HasMaxLength(7);

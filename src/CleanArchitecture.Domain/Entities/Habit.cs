@@ -4,7 +4,6 @@ namespace CleanArchitecture.Domain.Entities;
 
 public class Habit : Entity<long>
 {
-  public long HabitId { get; set; }
   public long UserId { get; set; }
   public string Name { get; set; } = null!;
   public string? Description { get; set; }

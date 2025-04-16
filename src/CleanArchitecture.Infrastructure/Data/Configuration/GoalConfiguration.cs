@@ -6,7 +6,7 @@ public class GoalConfiguration : IEntityTypeConfiguration<Goal>
 {
   public void Configure(EntityTypeBuilder<Goal> builder)
   {
-    builder.HasKey(g => g.GoalId);
+    builder.HasKey(g => g.Id);
 
     builder.Property(g => g.Title)
         .IsRequired()

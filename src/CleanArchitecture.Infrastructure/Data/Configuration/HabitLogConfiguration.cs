@@ -6,7 +6,7 @@ public class HabitLogConfiguration : IEntityTypeConfiguration<HabitLog>
 {
   public void Configure(EntityTypeBuilder<HabitLog> builder)
   {
-    builder.HasKey(hl => hl.HabitLogId);
+    builder.HasKey(hl => hl.Id);
     builder.Property(hl => hl.Status).IsRequired().HasMaxLength(20);
 
     // Relationship: HabitLog -> Habit (N:1)

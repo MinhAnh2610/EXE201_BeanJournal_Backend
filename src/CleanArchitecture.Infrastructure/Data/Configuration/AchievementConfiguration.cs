@@ -6,7 +6,7 @@ public class AchievementConfiguration : IEntityTypeConfiguration<Achievement>
 {
   public void Configure(EntityTypeBuilder<Achievement> builder)
   {
-    builder.HasKey(a => a.AchievementId);
+    builder.HasKey(a => a.Id);
 
     builder.Property(a => a.Name).IsRequired().HasMaxLength(150);
     builder.Property(a => a.Description).IsRequired();

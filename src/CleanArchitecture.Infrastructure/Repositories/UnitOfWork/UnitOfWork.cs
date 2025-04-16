@@ -5,17 +5,25 @@ using Microsoft.Extensions.Logging;
 
 namespace CleanArchitecture.Infrastructure.Repositories.UnitOfWork;
 
-public class UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger, ITimeZoneService timeZoneService) : IUnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
-  private readonly ApplicationDbContext _context = context;
+  private readonly ApplicationDbContext _context;
   private IDbContextTransaction _transaction;
   //private readonly bool _commited;
-  private readonly ILogger<UnitOfWork> _logger = logger;
-  private readonly ITimeZoneService _timeZoneService = timeZoneService;
+  private readonly ILogger<UnitOfWork> _logger;
+  private readonly ITimeZoneService _timeZoneService;
 
   #region Repositories
   public IUserRepository Users => new UserRepository(_context);
   #endregion
+
+  public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger, ITimeZoneService timeZoneService)
+  {
+    _context = context;
+    _logger = logger;
+    _timeZoneService = timeZoneService;
+    _transaction = _context.Database.BeginTransaction();
+  }
 
   public async Task RollBackAsync()
   {
@@ -40,8 +48,7 @@ public class UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger
   }
   public async Task<IDbContextTransaction> BeginTransactionAsync()
   {
-    _transaction = await _context.Database.BeginTransactionAsync();
-    return _transaction;
+    return await _context.Database.BeginTransactionAsync();
   }
   public void Dispose()
   {

@@ -15,13 +15,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Achievements",
                 columns: table => new
                 {
-                    AchievementId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CriteriaKey = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     BadgeIconUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -30,14 +29,14 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Achievements", x => x.AchievementId);
+                    table.PrimaryKey("PK_Achievements", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "SubscriptionPlans",
                 columns: table => new
                 {
-                    SubscriptionPlanId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlanCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -46,7 +45,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     PriceYearly = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     BillingCycle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     FeatureFlags = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -55,21 +53,20 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubscriptionPlans", x => x.SubscriptionPlanId);
+                    table.PrimaryKey("PK_SubscriptionPlans", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Themes",
                 columns: table => new
                 {
-                    ThemeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StylePropertiesJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPremium = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     IsPredefined = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -78,23 +75,22 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Themes", x => x.ThemeId);
+                    table.PrimaryKey("PK_Themes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClerkUserId = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Username = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    AuthProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthProviderId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfileImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EncryptionMasterKey = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -103,14 +99,14 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Entries",
                 columns: table => new
                 {
-                    EntryId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -120,7 +116,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     EntryPasswordHash = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SentimentScore = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
                     DominantMoodLabel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -129,12 +124,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entries", x => x.EntryId);
+                    table.PrimaryKey("PK_Entries", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Entries_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -142,14 +137,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Goals",
                 columns: table => new
                 {
-                    GoalId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     TargetDate = table.Column<DateTime>(type: "date", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -158,12 +152,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Goals", x => x.GoalId);
+                    table.PrimaryKey("PK_Goals", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Goals_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -171,7 +165,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Habits",
                 columns: table => new
                 {
-                    HabitId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
@@ -179,7 +173,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     Frequency = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ColorCode = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: true),
                     Icon = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -188,12 +181,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Habits", x => x.HabitId);
+                    table.PrimaryKey("PK_Habits", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Habits_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -201,7 +194,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Integrations",
                 columns: table => new
                 {
-                    IntegrationId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     ServiceName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -210,7 +203,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     ExternalUserId = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Scopes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -219,12 +211,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Integrations", x => x.IntegrationId);
+                    table.PrimaryKey("PK_Integrations", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Integrations_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -232,11 +224,10 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    TagId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -245,12 +236,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.TagId);
+                    table.PrimaryKey("PK_Tags", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Tags_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -258,13 +249,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Templates",
                 columns: table => new
                 {
-                    TemplateId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsPredefined = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -273,12 +263,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Templates", x => x.TemplateId);
+                    table.PrimaryKey("PK_Templates", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Templates_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -297,13 +287,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         name: "FK_UserAchievements_Achievements_AchievementId",
                         column: x => x.AchievementId,
                         principalTable: "Achievements",
-                        principalColumn: "AchievementId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserAchievements_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -327,13 +317,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         name: "FK_UserSettings_Themes_ThemeId",
                         column: x => x.ThemeId,
                         principalTable: "Themes",
-                        principalColumn: "ThemeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_UserSettings_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -341,7 +331,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "UserSubscriptions",
                 columns: table => new
                 {
-                    UserSubscriptionId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     PlanId = table.Column<int>(type: "int", nullable: false),
@@ -349,7 +339,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     PaymentGatewayRef = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -358,18 +347,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSubscriptions", x => x.UserSubscriptionId);
+                    table.PrimaryKey("PK_UserSubscriptions", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserSubscriptions_SubscriptionPlans_PlanId",
                         column: x => x.PlanId,
                         principalTable: "SubscriptionPlans",
-                        principalColumn: "SubscriptionPlanId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_UserSubscriptions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -389,13 +378,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         name: "FK_AIAnalysisResults_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AIAnalysisResults_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -408,13 +397,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     Label = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Score = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
                     Source = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -423,13 +406,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         name: "FK_Moods_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Moods_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -437,7 +420,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Multimedia",
                 columns: table => new
                 {
-                    MediaId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EntryId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
@@ -446,7 +429,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     MimeType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     FileName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SizeBytes = table.Column<long>(type: "bigint", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -455,18 +437,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Multimedia", x => x.MediaId);
+                    table.PrimaryKey("PK_Multimedia", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Multimedia_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Multimedia_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -474,7 +456,7 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Todos",
                 columns: table => new
                 {
-                    TodoId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     EntryId = table.Column<long>(type: "bigint", nullable: true),
@@ -482,7 +464,6 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DueDate = table.Column<DateTime>(type: "date", nullable: true),
                     CompletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -491,18 +472,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Todos", x => x.TodoId);
+                    table.PrimaryKey("PK_Todos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Todos_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Todos_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -510,14 +491,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "GoalUpdates",
                 columns: table => new
                 {
-                    GoalUpdateId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GoalId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     EntryId = table.Column<long>(type: "bigint", nullable: true),
                     UpdateText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProgressMetric = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -526,24 +506,24 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoalUpdates", x => x.GoalUpdateId);
+                    table.PrimaryKey("PK_GoalUpdates", x => x.Id);
                     table.ForeignKey(
                         name: "FK_GoalUpdates_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_GoalUpdates_Goals_GoalId",
                         column: x => x.GoalId,
                         principalTable: "Goals",
-                        principalColumn: "GoalId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GoalUpdates_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -551,13 +531,12 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "HabitLogs",
                 columns: table => new
                 {
-                    HabitLogId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HabitId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -566,18 +545,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HabitLogs", x => x.HabitLogId);
+                    table.PrimaryKey("PK_HabitLogs", x => x.Id);
                     table.ForeignKey(
                         name: "FK_HabitLogs_Habits_HabitId",
                         column: x => x.HabitId,
                         principalTable: "Habits",
-                        principalColumn: "HabitId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_HabitLogs_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -585,14 +564,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 name: "Streaks",
                 columns: table => new
                 {
-                    StreakId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RelatedHabitId = table.Column<long>(type: "bigint", nullable: true),
                     CurrentLength = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     LongestLength = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -601,18 +579,18 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Streaks", x => x.StreakId);
+                    table.PrimaryKey("PK_Streaks", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Streaks_Habits_RelatedHabitId",
                         column: x => x.RelatedHabitId,
                         principalTable: "Habits",
-                        principalColumn: "HabitId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Streaks_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -631,13 +609,13 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         name: "FK_EntryTags_Entries_EntryId",
                         column: x => x.EntryId,
                         principalTable: "Entries",
-                        principalColumn: "EntryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EntryTags_Tags_TagId",
                         column: x => x.TagId,
                         principalTable: "Tags",
-                        principalColumn: "TagId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
