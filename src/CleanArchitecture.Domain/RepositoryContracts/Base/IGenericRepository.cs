@@ -6,9 +6,9 @@
     Task CreateAsync(T entity);
     List<T> GetAll();
     Task<List<T>> GetAllAsync();
-    T GetById(Guid code);
-    T GetById(int id);
-    T GetById(string code);
+    T? GetById(Guid code);
+    T? GetById(int id);
+    T? GetById(string code);
     Task<T?> GetByIdAsync(Guid code);
     Task<T?> GetByIdAsync(int id);
     Task<T?> GetByIdAsync(string code);

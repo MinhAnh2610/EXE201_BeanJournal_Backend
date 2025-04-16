@@ -22,6 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.1" />
     <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="4.0.0" />
     <PackageReference Include="MimeKit" Version="4.11.0" />
+    <PackageReference Include="Svix" Version="1.64.0" />
   </ItemGroup>
 
   <ItemGroup>

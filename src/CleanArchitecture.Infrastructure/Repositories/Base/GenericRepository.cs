@@ -2,18 +2,13 @@
 
 namespace CleanArchitecture.Infrastructure.Repositories.Base;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : class
+public class GenericRepository<T>(ApplicationDbContext context) : IGenericRepository<T> where T : class
 {
-  protected readonly ApplicationDbContext _context;
-
-  public GenericRepository(ApplicationDbContext context)
-  {
-    _context = context;
-  }
+  protected readonly ApplicationDbContext _context = context;
 
   public virtual List<T> GetAll()
   {
-    return _context.Set<T>().ToList();
+    return [.. _context.Set<T>()];
   }
 
   public virtual async Task<List<T>> GetAllAsync()
@@ -43,7 +38,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     tracker.State = EntityState.Deleted;
   }
 
-  public virtual T GetById(int id)
+  public virtual T? GetById(int id)
   {
     var entity = _context.Set<T>().Find(id);
     if (entity != null)
@@ -51,7 +46,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
       _context.Entry(entity).State = EntityState.Detached;
     }
 
-    return entity!;
+    return entity;
   }
 
   public virtual async Task<T?> GetByIdAsync(int id)
@@ -65,7 +60,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     return entity;
   }
 
-  public virtual T GetById(string code)
+  public virtual T? GetById(string code)
   {
     var entity = _context.Set<T>().Find(code);
     if (entity != null)
@@ -87,7 +82,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     return entity;
   }
 
-  public virtual T GetById(Guid code)
+  public virtual T? GetById(Guid code)
   {
     var entity = _context.Set<T>().Find(code);
     if (entity != null)
@@ -111,10 +106,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
 
   public virtual void Attach(T entity)
   {
-    if (entity == null)
-    {
-      throw new ArgumentNullException(nameof(entity));
-    }
+    ArgumentNullException.ThrowIfNull(entity);
 
     _context.Attach(entity);
   }

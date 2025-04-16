@@ -10,7 +10,7 @@ public class UnitOfWork : IUnitOfWork
 {
   private readonly ApplicationDbContext _context;
   private IDbContextTransaction _transaction;
-  private bool _commited;
+  private readonly bool _commited;
   private readonly ILogger<UnitOfWork> _logger;
   private readonly ITimeZoneService _timeZoneService;
 

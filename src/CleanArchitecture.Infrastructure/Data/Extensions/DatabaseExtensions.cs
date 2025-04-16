@@ -6,24 +6,24 @@ namespace CleanArchitecture.Infrastructure.Data.Extensions;
 
 public static class DatabaseExtensions
 {
-  public static async Task InitializeDatabaseAsync(this WebApplication app)
-  {
-    using var scope = app.Services.CreateScope();
+  //public static async Task InitializeDatabaseAsync(this WebApplication app)
+  //{
+  //  using var scope = app.Services.CreateScope();
 
-    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+  //  var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+  //  var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+  //  var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-    //context.Database.MigrateAsync().GetAwaiter().GetResult();
+  //  context.Database.MigrateAsync().GetAwaiter().GetResult();
 
-    //await SeedAsync(context, roleManager, userManager);
-  }
+  //  await SeedAsync(context, roleManager, userManager);
+  //}
 
-  private static async Task SeedAsync(ApplicationDbContext context, RoleManager<Role> roleManager, UserManager<User> userManager)
-  {
-    //await SeedRoleAsync(context, roleManager);
-    //await SeedUserAsync(context, userManager);
-  }
+  //private static async Task SeedAsync(ApplicationDbContext context, RoleManager<Role> roleManager, UserManager<User> userManager)
+  //{
+  //  await SeedRoleAsync(context, roleManager);
+  //  await SeedUserAsync(context, userManager);
+  //}
 
   //private static async Task SeedRoleAsync(ApplicationDbContext context, RoleManager<Role> roleManager)
   //{
