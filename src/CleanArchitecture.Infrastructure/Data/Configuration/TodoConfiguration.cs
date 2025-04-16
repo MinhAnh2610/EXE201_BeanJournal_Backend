@@ -16,7 +16,7 @@ public class TodoConfiguration : IEntityTypeConfiguration<Todo>
     builder.HasOne(t => t.User)
            .WithMany(u => u.Todos)
            .HasForeignKey(t => t.UserId)
-           .OnDelete(DeleteBehavior.Cascade); // If user deleted, delete their tasks
+           .OnDelete(DeleteBehavior.Restrict); // If user deleted, delete their tasks
 
     // Relationship: Task -> Entry (N:1, Optional)
     builder.HasOne(t => t.Entry)

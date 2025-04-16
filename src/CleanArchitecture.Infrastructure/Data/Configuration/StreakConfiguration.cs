@@ -15,7 +15,7 @@ public class StreakConfiguration : IEntityTypeConfiguration<Streak>
     builder.HasOne(s => s.User)
            .WithMany(u => u.Streaks)
            .HasForeignKey(s => s.UserId)
-           .OnDelete(DeleteBehavior.Cascade);
+           .OnDelete(DeleteBehavior.Restrict);
 
     // Relationship: Streak -> Habit (N:1, Optional)
     builder.HasOne(s => s.Habit) // Assumes navigation property exists

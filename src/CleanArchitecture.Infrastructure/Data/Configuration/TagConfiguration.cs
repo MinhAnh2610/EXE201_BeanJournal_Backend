@@ -14,7 +14,7 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
     builder.HasOne(t => t.User)
            .WithMany(u => u.Tags)
            .HasForeignKey(t => t.UserId)
-           .OnDelete(DeleteBehavior.Cascade); // If User deleted, delete their tags
+           .OnDelete(DeleteBehavior.Restrict); // If User deleted, delete their tags
 
     // Unique constraint: Tag name must be unique per user
     builder.HasIndex(t => new { t.UserId, t.Name }).IsUnique();

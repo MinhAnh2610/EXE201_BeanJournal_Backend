@@ -22,7 +22,7 @@ public class GoalConfiguration : IEntityTypeConfiguration<Goal>
     builder.HasOne(g => g.User)
            .WithMany(u => u.Goals)
            .HasForeignKey(g => g.UserId)
-           .OnDelete(DeleteBehavior.Cascade); // If user deleted, delete their goals
+           .OnDelete(DeleteBehavior.Restrict); // If user deleted, delete their goals
 
     // Relationship: Goal -> GoalUpdates (1:N)
     // Configured implicitly by the GoalUpdate side, but can be specified here too
