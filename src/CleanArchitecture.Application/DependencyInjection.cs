@@ -30,7 +30,7 @@ public static class DependencyInjection
 
     // Add services
     services.AddScoped<IAuthService, AuthService>();
-    //services.AddScoped<IProfileService, ProfileService>();
+    services.AddScoped<IClerkSyncService, ClerkSyncService>();
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IRoleService, RoleService>();
     services.AddScoped<ITimeZoneService, TimeZoneService>();

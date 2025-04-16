@@ -15,6 +15,8 @@ public static class DependencyInjection
     // Load .env file
     DotNetEnv.Env.Load();
 
+    services.AddControllers();
+
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen(options =>

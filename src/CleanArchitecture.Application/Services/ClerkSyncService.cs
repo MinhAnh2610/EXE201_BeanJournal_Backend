@@ -3,16 +3,10 @@ using System.Text.Json;
 
 namespace CleanArchitecture.Application.Services;
 
-public class ClerkSyncService : IClerkSyncService
+public class ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> logger) : IClerkSyncService
 {
-  private readonly IUnitOfWork _unitOfWork;
-  private readonly ILogger<ClerkSyncService> _logger;
-
-  public ClerkSyncService(IUnitOfWork unitOfWork, ILogger<ClerkSyncService> logger)
-  {
-    _unitOfWork = unitOfWork;
-    _logger = logger;
-  }
+  private readonly IUnitOfWork _unitOfWork = unitOfWork;
+  private readonly ILogger<ClerkSyncService> _logger = logger;
 
   public async Task HandleUserCreatedAsync(JsonElement userData)
   {
